@@ -1,0 +1,15 @@
+extends layout
+
+block layout-content
+    div
+        div.card-panel.orange.darken-1
+            h1.center-align Welcome, #{userProfile.nickname}!
+        div(id="errorMsg").center-align.ErrorMessage Error will display here
+        div(id="valueCard")
+            h4.center-align ‎Illuminance (Ambient Light)
+            div(id="valueCard").div.card-panel.grey.lighten-5            
+                h1(id="value").center-align 200
+        div.center-align
+            a(href="/").waves-effect.waves-light.btn-large.amber.darken-4
+                i.material-icons.left cloud_off
+                | Disconnect

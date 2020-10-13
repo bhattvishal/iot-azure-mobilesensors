@@ -1,0 +1,14 @@
+extends layout
+
+block layout-content
+	div
+		div.card-panel.orange.darken-1
+			h1.center-align Ambient Light Sensor
+		div.card-panel.grey.lighten-5.center
+			form(action="/sensor", method="post", id="form1", name="form1_name")
+				input(type="text", name="deviceName_field", id="deviceName", placeholder="Device Name", required minlength="2" maxlength="20")
+				input(type="text", name="deviceId_field", id="deviceId", placeholder="Device ID", required minlength="8" maxlength="8")
+		div.center
+			a(href="javascript:document.getElementById('form1').submit();", id="connectButton").waves-effect.waves-light.btn-large.amber.darken-4
+				i.material-icons.left cloud
+				| Connect

@@ -1,0 +1,11 @@
+extends layout
+
+block layout-content
+    div
+        div.card-panel.red.darken-4
+            h2.center-align Oops!!!
+        div.ErrorMessage #{error}
+        div.center-align.valign-bottom
+            a(href="/").waves-effect.waves-light.btn-large.amber.darken-4
+                i.material-icons.left cloud_off
+                | Try Again

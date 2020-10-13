@@ -1,0 +1,24 @@
+{
+  "name": "whatabyte-portal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "ui": "browser-sync start --proxy=localhost:8000 --files='**/*.css, **/*.pug, **/*.js' --ignore=node_modules --reload-delay 10 --no-ui --no-notify"
+  },
+  "keywords": [],
+  "author": "craigz",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "@azure/event-hubs": "^5.3.0",
+    "@opentelemetry/types": "^0.3.3",
+    "chalk": "2.4.1",
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
+  }
+}

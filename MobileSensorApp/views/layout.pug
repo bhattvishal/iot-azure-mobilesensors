@@ -1,0 +1,64 @@
+html
+	head
+		title #{title} | MOBILE SENSORS
+		meta(charset="utf-8")
+		link(rel="shortcut icon", href="/favicon.ico")
+		meta( name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no' )
+		meta(name="theme-color", content="#000000")
+		link(rel="stylesheet", href="/css/style.css")
+		link(rel="stylesheet", href="/css/materialize.min.css")
+		link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+	body
+		main
+			div#root
+			block layout-content
+		footer.page-footer.white.center
+			div.footer-copyright.orange.darken-1
+				div.container Developed By Bhatt, Vishal for Hyd Upskilling
+		script(src="/js/materialize.min.js")
+	script(type="text/javascript").
+		$(document).ready(function(){
+			var sensorValue = 0;
+			$("#form1").on("change", function(){
+				if (typeof(Storage) !== "undefined") {					
+					sessionStorage.setItem("deviceId", $("#deviceId").val().toUpperCase());
+					sessionStorage.setItem("deviceName", $("#deviceName").val().toUpperCase());					
+				}
+			});
+			if (window.AmbientLightSensor){
+				try{
+					const sensor = new AmbientLightSensor();
+
+					// Detect changes in the light
+					sensor.onreading = () => {
+						sensorValue = sensor.illuminance;
+						$("#value").html(sensorValue);
+					}
+
+					// Has an error occured?
+					sensor.onerror = event => $("#errorMsg").html(event.error.message);
+					sensor.start();
+
+					$("#errorMsg").hide();
+					$("#valueCard").show();					
+				} catch(err) {
+					$("#valueCard").hide();	
+					$("#errorMsg").show();			
+					$("#errorMsg").html(err.message);
+				}
+			} else {			
+				$("#valueCard").hide();	
+				$("#errorMsg").show();	   
+				$("#errorMsg").html("It looks like your browser doesn\'t support this feature");
+			}
+			setInterval(sendSensorReading, 2000);
+			function sendSensorReading(){
+				$.post("/data", {
+					payload:{
+						illuminance: sensorValue,
+						deviceId: sessionStorage.getItem("deviceId"),
+						deviceName: sessionStorage.getItem("deviceName")
+					}});
+			}
+		});
