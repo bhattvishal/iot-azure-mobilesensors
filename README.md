@@ -20,3 +20,5 @@ This is a Web App hosted on a Web App instance of Azure App Service Plan. This a
 ### 2. **Dashboard App**
 
 This is another Web App hosted on a Web App instance of Azure App Service Plan. This app is hosted on cloud and displays a REAL-TIME sensor values from connected Mobile Sensors.
+
+## Code Structure
